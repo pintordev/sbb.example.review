@@ -24,8 +24,10 @@
             <tr th:each="question : ${questionList}">
                 <!-- thymeleaf 문법; text => printf -->
                 <!-- ${data} => %data -->
-                <!-- question 데이터에서 subject 출력 -->
-                <td th:text="${question.subject}"></td>
+                <!-- question 데이터에서 subject 출력, 상세 페이지로 접근 가능하도록 a 태그 적용 -->
+                <td>
+                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                </td>
                 <!-- question 데이터에서 createDate 출력 -->
                 <td th:text="${question.createDate}"></td>
             </tr>
