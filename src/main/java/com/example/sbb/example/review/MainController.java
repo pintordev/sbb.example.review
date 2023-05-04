@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
-    @GetMapping("/sbb")
+
+    // ROOT URL Setting
+    @GetMapping("/")
     @ResponseBody
     public String index() {
-        return "Welcome to SBB World!";
+        return "redirect:/question/list"; // ROOT URL 접속 시 /question/list 로 redirect
     }
 }
