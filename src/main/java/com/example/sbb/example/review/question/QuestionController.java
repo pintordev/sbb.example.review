@@ -12,12 +12,12 @@ import java.util.List;
 @Controller
 public class QuestionController {
 
-    private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
     @GetMapping("/question/list")
     public String list(Model model) { // Model 객체를 이용하여 controller 상의 데이터를 template에 전달 가능
         // question list를 template에 전달
-        List<Question> questionList = this.questionRepository.findAll();
+        List<Question> questionList = this.questionService.getList();
         model.addAttribute("questionList", questionList); // questionList 데이터를 "questionList" 라는 이름으로 template에 전달
         return "question_list";
     }
