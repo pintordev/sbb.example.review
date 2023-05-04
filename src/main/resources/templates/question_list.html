@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SBB</title>
+</head>
+<body>
+    <table>
+        <!-- table head -->
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>
+        <!-- table body -->
+        <tbody>
+            <!-- thymeleaf 문법; each => for-each -->
+            <!-- for (question : questionList) {} -->
+            <!-- questionList 내 데이터들을 tr element 내에서 question 이라는 이름으로 사용 -->
+            <tr th:each="question : ${questionList}">
+                <!-- thymeleaf 문법; text => printf -->
+                <!-- ${data} => %data -->
+                <!-- question 데이터에서 subject 출력 -->
+                <td th:text="${question.subject}"></td>
+                <!-- question 데이터에서 createDate 출력 -->
+                <td th:text="${question.createDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
