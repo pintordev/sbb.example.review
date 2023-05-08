@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SBB</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </head>
 <body>
     <!-- 질문 제목 -->
@@ -17,6 +18,7 @@
     <!-- 답변 목록 출력 -->
     <div>
         <ul>
+            <!-- 해당 question 내 answerList에 있는 answer들을 각각 불러와서 answer 내 content 목록으로 출력 -->
             <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
         </ul>
     </div>
