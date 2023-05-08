@@ -6,27 +6,44 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SBB</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 </head>
 <body>
-    <!-- 질문 제목 -->
-    <h1 th:text="${question.subject}"></h1>
-    <!-- 질문 내용 -->
-    <div th:text="${question.content}"></div>
-    <!-- 답변 개수 출력 -->
-    <h5 th:text="|${question.answerList.size()}개의 답변이 있습니다.|"></h5>
-    <!-- 답변 목록 출력 -->
     <div>
-        <ul>
-            <!-- 해당 question 내 answerList에 있는 answer들을 각각 불러와서 answer 내 content 목록으로 출력 -->
-            <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
-        </ul>
+        <div class="container my-3">
+            <!-- 질문 제목 -->
+            <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
+            <!-- 질문 내용 -->
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
+                    <div class="d-flex justify-content-end">
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 답변 개수 출력 -->
+            <h5 class="border-bottom my-3 py-2" th:text="|${question.answerList.size()}개의 답변이 있습니다.|"></h5>
+            <!-- 답변 목록 출력 -->
+            <div class="card my-3" th:each="answer : ${question.answerList}">
+                <div class="card-body">
+                    <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
+                    <div class="d-flex justify-content-end">
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 답변 등록 -->
+            <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
+                <!-- /answer/create/# URL에 content가 전달됨 -->
+                <textarea name="content" id="content" rows="10" class="form-control"></textarea>
+                <input type="submit" value="답변 등록" class="btn btn-primary my-2">
+            </form>
+        </div>
     </div>
-    <!-- 답변 등록 버튼 -->
-    <form th:action="@{|/answer/create/${question.id}|}" method="post">
-        <!-- /answer/create/# URL에 content가 전달됨 -->
-        <textarea name="content" id="content" rows="15"></textarea>
-        <input type="submit" value="답변 등록">
-    </form>
 </body>
 </html>
