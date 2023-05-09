@@ -30,9 +30,7 @@
         <!-- 답변 작성 -->
         <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
             <!-- error 출력 -->
-            <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-                <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-            </div>
+            <div th:replace="~{form_errors :: formErrorsFragment}"></div>
             <!-- /answer/create/# URL에 content가 전달됨 -->
             <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
             <input type="submit" value="답변 등록" class="btn btn-primary my-2">

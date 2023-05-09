@@ -1,0 +1,6 @@
+<!-- th:fragment="formErrorsFragment" => 해당 엘리먼트 및 하위 엘리먼트를 formErrorsFragment 란 이름으로 공통 템플릿 화 한다 -->
+<!-- th:replace="~{from_errors :: formErrorsFragment}" => 공통 템플릿을 삽입할 때 사용하는 구문 -->
+<!-- "th:replace="~{템플릿 파일명 :: 설정한 이름}" -->
+<div th:fragment="formErrorsFragment" class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+  <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+</div>
